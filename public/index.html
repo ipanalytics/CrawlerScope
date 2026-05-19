@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CrawlerScope</title>
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Crawler IP intelligence</p>
+        <h1>CrawlerScope</h1>
+      </div>
+      <div class="status"><span id="status-dot"></span><span id="generated-at">Loading</span></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h2>Official IP ranges for search, AI, and monitoring crawlers</h2>
+          <p>Track published crawler ranges, source health, IPv4/IPv6 split, AI bot footprint, and deployable robots/WAF snippets.</p>
+        </div>
+      </section>
+
+      <section class="control-strip">
+        <label>Category<select id="category-filter"><option value="all">All categories</option></select></label>
+        <label>Operator<select id="operator-filter"><option value="all">All operators</option></select></label>
+        <label>Source<select id="source-filter"><option value="all">All source types</option></select></label>
+        <label>Service<select id="service-filter"><option value="all">All services</option></select></label>
+        <label>Search<input id="search" type="search" placeholder="Service, UA, source URL"></label>
+      </section>
+      <section class="quick-strip">
+        <div id="filter-summary" class="filter-summary">All services selected</div>
+        <div class="quick-actions">
+          <button type="button" data-preset="ai">AI only</button>
+          <button type="button" data-preset="official">Official lists</button>
+          <button type="button" data-preset="monitoring">Monitoring</button>
+          <button type="button" id="copy-cidr">Copy CIDRs</button>
+          <button type="button" id="reset-filters" class="secondary">Reset</button>
+        </div>
+      </section>
+
+      <section class="metrics" id="metrics"></section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Operator Country Map</h3>
+            <span id="map-note" class="note"></span>
+          </div>
+          <div id="map"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h3>Category Mix</h3></div>
+          <canvas id="category-chart" height="220"></canvas>
+          <div id="insights" class="insights"></div>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-head"><h3>Top Operators By Prefixes</h3></div>
+          <div id="operator-bars" class="bars"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Export Snippets</h3></div>
+          <div class="snippet-links">
+            <a id="robots-link" href="data/current/robots-ai.txt">robots-ai.txt</a>
+            <a id="nginx-link" href="data/current/nginx-ai-map.conf">nginx-ai-map.conf</a>
+            <a id="json-link" href="data/current/crawlers.json">crawlers.json</a>
+          </div>
+          <div class="export-actions">
+            <button type="button" data-export="json">Filtered JSON</button>
+            <button type="button" data-export="csv">Filtered CSV</button>
+            <button type="button" data-export="cidr">CIDR list</button>
+            <button type="button" data-export="robots">robots.txt</button>
+            <button type="button" data-export="nginx">nginx map</button>
+          </div>
+          <div id="export-status" class="note"></div>
+          <pre id="robots-preview"></pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Service Explorer</h3><span id="table-note" class="note"></span></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th><button type="button" data-sort="service">Service</button></th>
+                <th><button type="button" data-sort="category">Category</button></th>
+                <th><button type="button" data-sort="sourceType">Source</button></th>
+                <th><button type="button" data-sort="prefixes">Prefixes</button></th>
+                <th>User-Agent</th>
+                <th><button type="button" data-sort="authority">Authority</button></th>
+              </tr>
+            </thead>
+            <tbody id="service-table"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
