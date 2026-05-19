@@ -9,9 +9,11 @@ charts, filtered exports, robots.txt snippets, and Nginx user-agent maps.
 
 Live demo:
 
-`https://YOUR_GITHUB_USERNAME.github.io/CrawlerScope/`
+`https://ipanalytics.github.io/CrawlerScope/`
 
-Replace the URL above after enabling GitHub Pages for your repository.
+Repository:
+
+`https://github.com/ipanalytics/CrawlerScope`
 
 ## What It Tracks
 
@@ -116,17 +118,16 @@ http://127.0.0.1:8080/
 
 ## GitHub Pages Setup
 
-1. Create a new GitHub repository, for example `CrawlerScope`.
-2. Upload this folder as the repository root.
+1. Open `https://github.com/ipanalytics/CrawlerScope/settings/pages`.
+2. Set `Source` to `GitHub Actions`.
 3. Go to `Settings -> Pages`.
-4. Set `Source` to `GitHub Actions`.
-5. Go to `Actions`.
-6. Run the `CrawlerScope` workflow manually once.
+4. Go to `Actions`.
+5. Run the `CrawlerScope` workflow manually once.
 
 After the first successful run, the site will be available at:
 
 ```text
-https://YOUR_GITHUB_USERNAME.github.io/CrawlerScope/
+https://ipanalytics.github.io/CrawlerScope/
 ```
 
 ## Update Schedule
