@@ -7,9 +7,9 @@ It collects public operator-published sources, normalizes IPs into CIDR prefixes
 tracks source health, and ships an interactive browser UI with filters, maps,
 charts, filtered exports, robots.txt snippets, and Nginx user-agent maps.
 
-Live demo:
+## Live Demo
 
-`https://ipanalytics.github.io/CrawlerScope/`
+### [Open CrawlerScope Dashboard](https://ipanalytics.github.io/CrawlerScope/)
 
 Repository:
 
