@@ -1,0 +1,57 @@
+name: CrawlerScope
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: crawler-scope
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update crawler data
+        env:
+          CRAWLER_SCOPE_SNAPSHOT_RETENTION: "168"
+          CRAWLER_SCOPE_HISTORY_RETENTION: "720"
+          CRAWLER_SCOPE_USER_AGENT: "CrawlerScope/0.1 (+${{ github.server_url }}/${{ github.repository }}; GitHub Actions public-data collector)"
+        run: python3 scripts/update.py
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update CrawlerScope data"
+          file_pattern: "data"
+
+      - name: Build Pages artifact
+        run: |
+          rm -rf site
+          cp -R public site
+          cp -R data site/data
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
