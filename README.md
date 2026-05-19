@@ -11,6 +11,8 @@ charts, filtered exports, robots.txt snippets, and Nginx user-agent maps.
 
 ### [Open CrawlerScope Dashboard](https://ipanalytics.github.io/CrawlerScope/)
 
+![CrawlerScope dashboard screenshot](./screenshot.png)
+
 Repository:
 
 `https://github.com/ipanalytics/CrawlerScope`
