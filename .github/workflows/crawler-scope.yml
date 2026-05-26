@@ -1,7 +1,7 @@
 name: CrawlerScope
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
     - cron: "23 */6 * * *"
 
@@ -9,17 +9,26 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
-  group: crawler-scope
+  group: crawler-scope-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Update crawler data
         env:
@@ -33,6 +42,9 @@ jobs:
         with:
           commit_message: "Update CrawlerScope data"
           file_pattern: "data config"
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
 
       - name: Publish dataset release
         env:
@@ -41,16 +53,33 @@ jobs:
           stamp="$(python3 -c 'import json; print(json.load(open("data/current/crawlers.json"))["generatedAt"].replace(":", "").replace("-", "").replace("Z", "Z"))')"
           tag="dataset-${stamp}"
           snapshot="$(ls -1 data/snapshots/*.json | sort | tail -n 1)"
+
           python3 scripts/release_notes.py > release-notes.md
-          gh release create "$tag" \
-            data/current/crawlers.json \
-            data/current/robots-ai.txt \
-            data/current/nginx-ai-map.conf \
-            data/history/summary.csv \
-            "$snapshot" \
-            --title "CrawlerScope dataset ${stamp}" \
-            --notes-file release-notes.md \
-            --latest
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" \
+              --title "CrawlerScope dataset ${stamp}" \
+              --notes-file release-notes.md \
+              --latest
+
+            gh release upload "$tag" \
+              data/current/crawlers.json \
+              data/current/robots-ai.txt \
+              data/current/nginx-ai-map.conf \
+              data/history/summary.csv \
+              "$snapshot" \
+              --clobber
+          else
+            gh release create "$tag" \
+              data/current/crawlers.json \
+              data/current/robots-ai.txt \
+              data/current/nginx-ai-map.conf \
+              data/history/summary.csv \
+              "$snapshot" \
+              --title "CrawlerScope dataset ${stamp}" \
+              --notes-file release-notes.md \
+              --latest
+          fi
 
       - name: Build Pages artifact
         run: |
@@ -66,9 +95,11 @@ jobs:
   deploy:
     needs: update
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
