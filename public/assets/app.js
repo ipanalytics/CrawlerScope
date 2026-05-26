@@ -19,7 +19,9 @@ const filterLabels = {
   "service-filter": "All services",
 };
 const categoryNames = {
+  "ad-verification": "Ad verification",
   ai: "AI crawlers",
+  analytics: "Analytics crawlers",
   archive: "Archive",
   fetcher: "Fetchers",
   monitoring: "Monitoring",
@@ -31,6 +33,7 @@ const categoryNames = {
 const sourceTypeNames = {
   documented_user_agent: "Documented UA",
   known_static: "Known static",
+  official_embedded_json: "Official embedded JSON",
   official_json: "Official JSON",
   official_text: "Official text",
 };
@@ -38,6 +41,7 @@ const countryNames = {
   US: "United States",
   GB: "United Kingdom",
   CN: "China",
+  KR: "South Korea",
   RU: "Russia",
   DE: "Germany",
   FR: "France",

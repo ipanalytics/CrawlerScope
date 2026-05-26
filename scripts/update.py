@@ -21,7 +21,7 @@ HISTORY = DATA / "history"
 
 USER_AGENT = os.environ.get(
     "CRAWLER_SCOPE_USER_AGENT",
-    "CrawlerScope/0.1 (+https://github.com/your-org/crawler-scope; public-data collector)",
+    "CrawlerScope/0.1 (+https://github.com/ipanalytics/CrawlerScope/; public-data collector)",
 )
 RETENTION_SNAPSHOTS = int(os.environ.get("CRAWLER_SCOPE_SNAPSHOT_RETENTION", "168"))
 RETENTION_HISTORY_ROWS = int(os.environ.get("CRAWLER_SCOPE_HISTORY_RETENTION", "720"))
@@ -89,17 +89,53 @@ SOURCES = [
         "authoritative": True,
     },
     {
+        "id": "duckassistbot",
+        "service": "DuckAssistBot",
+        "operator": "DuckDuckGo",
+        "category": "ai",
+        "operatorCountry": "US",
+        "sourceType": "official_json",
+        "sourceUrl": "https://duckduckgo.com/duckassistbot.json",
+        "userAgentPatterns": ["DuckAssistBot"],
+        "rdnsPatterns": ["*.duckduckgo.com"],
+        "authoritative": True,
+    },
+    {
         "id": "applebot",
         "service": "Applebot",
         "operator": "Apple",
         "category": "search",
         "operatorCountry": "US",
-        "sourceType": "documented_user_agent",
-        "sourceUrl": "https://support.apple.com/en-us/119829",
+        "sourceType": "official_json",
+        "sourceUrl": "https://search.developer.apple.com/applebot.json",
         "userAgentPatterns": ["Applebot"],
         "rdnsPatterns": ["*.applebot.apple.com"],
-        "authoritative": False,
-        "note": "Apple documents verification via user-agent and reverse DNS, but does not publish an official JSON IP list.",
+        "authoritative": True,
+        "documentationUrl": "https://support.apple.com/en-us/119829",
+    },
+    {
+        "id": "mojeekbot",
+        "service": "MojeekBot",
+        "operator": "Mojeek",
+        "category": "search",
+        "operatorCountry": "GB",
+        "sourceType": "official_json",
+        "sourceUrl": "https://www.mojeek.com/mojeekbot.json",
+        "userAgentPatterns": ["MojeekBot"],
+        "rdnsPatterns": ["*.mojeek.com"],
+        "authoritative": True,
+    },
+    {
+        "id": "naver-yeti",
+        "service": "Naver Yeti",
+        "operator": "Naver",
+        "category": "search",
+        "operatorCountry": "KR",
+        "sourceType": "official_json",
+        "sourceUrl": "https://searchadvisor.naver.com/doc/naverbot.json",
+        "userAgentPatterns": ["Yeti"],
+        "rdnsPatterns": ["*.naver.com"],
+        "authoritative": True,
     },
     {
         "id": "yandexbot",
@@ -223,16 +259,45 @@ SOURCES = [
     },
     {
         "id": "amazonbot",
-        "service": "Amazonbot / Amzn-SearchBot",
+        "service": "Amazonbot",
         "operator": "Amazon",
         "category": "ai",
         "operatorCountry": "US",
-        "sourceType": "documented_user_agent",
-        "sourceUrl": "https://developer.amazon.com/support/amazonbot",
-        "userAgentPatterns": ["Amazonbot", "Amzn-SearchBot", "Amzn-User"],
+        "sourceType": "official_embedded_json",
+        "sourceUrl": "https://developer.amazon.com/amazonbot/ip-addresses",
+        "userAgentPatterns": ["Amazonbot"],
         "rdnsPatterns": ["*.crawl.amazonbot.amazon"],
-        "authoritative": False,
-        "note": "Amazon documents crawler identities and verification; IP pages are not represented here as a single stable JSON feed.",
+        "authoritative": True,
+        "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+        "note": "Amazon publishes the list embedded in its developer page rather than as a standalone JSON endpoint.",
+    },
+    {
+        "id": "amazon-searchbot",
+        "service": "Amzn-SearchBot",
+        "operator": "Amazon",
+        "category": "ai",
+        "operatorCountry": "US",
+        "sourceType": "official_embedded_json",
+        "sourceUrl": "https://developer.amazon.com/amazonbot/searchbot-ip-addresses",
+        "userAgentPatterns": ["Amzn-SearchBot"],
+        "rdnsPatterns": ["*.crawl.amazonbot.amazon"],
+        "authoritative": True,
+        "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+        "note": "Amazon publishes the list embedded in its developer page rather than as a standalone JSON endpoint.",
+    },
+    {
+        "id": "amazon-amzn-user",
+        "service": "Amzn-User",
+        "operator": "Amazon",
+        "category": "fetcher",
+        "operatorCountry": "US",
+        "sourceType": "official_embedded_json",
+        "sourceUrl": "https://developer.amazon.com/amazonbot/live-ip-addresses",
+        "userAgentPatterns": ["Amzn-User"],
+        "rdnsPatterns": ["*.crawl.amazonbot.amazon"],
+        "authoritative": True,
+        "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+        "note": "Amazon publishes the live crawl list embedded in its developer page rather than as a standalone JSON endpoint.",
     },
     {
         "id": "meta-ai-crawlers",
@@ -261,6 +326,18 @@ SOURCES = [
         "authoritative": False,
     },
     {
+        "id": "mistralai-user",
+        "service": "MistralAI-User",
+        "operator": "Mistral AI",
+        "category": "ai",
+        "operatorCountry": "FR",
+        "sourceType": "official_json",
+        "sourceUrl": "https://mistral.ai/mistralai-user-ips.json",
+        "userAgentPatterns": ["MistralAI-User"],
+        "rdnsPatterns": [],
+        "authoritative": True,
+    },
+    {
         "id": "ahrefsbot",
         "service": "AhrefsBot",
         "operator": "Ahrefs",
@@ -272,6 +349,18 @@ SOURCES = [
         "rdnsPatterns": ["*.ahrefs.com", "*.ahrefs.net"],
         "authoritative": True,
         "documentationUrl": "https://help.ahrefs.com/articles/78658-what-is-the-list-of-your-ip-ranges",
+    },
+    {
+        "id": "lumar-crawler",
+        "service": "Lumar crawler",
+        "operator": "Lumar",
+        "category": "seo",
+        "operatorCountry": "GB",
+        "sourceType": "official_json",
+        "sourceUrl": "https://www.lumar.io/wp-content/uploads/2026/02/lumar_ip_list_feb_2026.json",
+        "userAgentPatterns": ["Lumar"],
+        "rdnsPatterns": [],
+        "authoritative": True,
     },
     {
         "id": "semrushbot",
@@ -325,6 +414,30 @@ SOURCES = [
         "sourceType": "official_json",
         "sourceUrl": "https://ip-ranges.datadoghq.com/synthetics.json",
         "userAgentPatterns": ["Datadog/Synthetics"],
+        "rdnsPatterns": [],
+        "authoritative": True,
+    },
+    {
+        "id": "ias-crawler",
+        "service": "IAS crawler",
+        "operator": "Integral Ad Science",
+        "category": "ad-verification",
+        "operatorCountry": "US",
+        "sourceType": "official_json",
+        "sourceUrl": "https://integralads.com/policy-docs/iasbot.json",
+        "userAgentPatterns": ["IASBot"],
+        "rdnsPatterns": [],
+        "authoritative": True,
+    },
+    {
+        "id": "ttd-content",
+        "service": "TTD-Content crawler",
+        "operator": "The Trade Desk",
+        "category": "ad-verification",
+        "operatorCountry": "US",
+        "sourceType": "official_text",
+        "sourceUrl": "https://ttd-content.adsrvr.org/ips",
+        "userAgentPatterns": ["TTD-Content"],
         "rdnsPatterns": [],
         "authoritative": True,
     },
@@ -392,6 +505,30 @@ SOURCES = [
         "sourceType": "official_json",
         "sourceUrl": "https://index.commoncrawl.org/ccbot.json",
         "userAgentPatterns": ["CCBot"],
+        "rdnsPatterns": [],
+        "authoritative": True,
+    },
+    {
+        "id": "flipboard-crawler",
+        "service": "Flipboard crawler",
+        "operator": "Flipboard",
+        "category": "social",
+        "operatorCountry": "US",
+        "sourceType": "official_text",
+        "sourceUrl": "https://cdn.flipboard.com/flipboard_ip.txt",
+        "userAgentPatterns": ["FlipboardProxy"],
+        "rdnsPatterns": [],
+        "authoritative": True,
+    },
+    {
+        "id": "parsely-crawler",
+        "service": "Parse.ly crawler",
+        "operator": "Parse.ly",
+        "category": "analytics",
+        "operatorCountry": "US",
+        "sourceType": "official_json",
+        "sourceUrl": "https://www.parse.ly/static/data/crawler-ips.json",
+        "userAgentPatterns": ["Parsely"],
         "rdnsPatterns": [],
         "authoritative": True,
     },
@@ -466,7 +603,7 @@ def write_json(path, value):
 def extract_prefixes(payload):
     prefixes = []
     if isinstance(payload, dict):
-        for key in ("ipv4Prefix", "ipv6Prefix", "prefix", "cidr", "ip", "ipv6", "ip_address"):
+        for key in ("ipv4Prefix", "ipv6Prefix", "prefix", "cidr", "ip", "ipv4", "ipv6", "ip_address", "ip_prefix"):
             value = payload.get(key)
             if value:
                 prefixes.append(value)
@@ -474,7 +611,7 @@ def extract_prefixes(payload):
             if isinstance(item, str):
                 prefixes.append(item)
             elif isinstance(item, dict):
-                for key in ("ipv4Prefix", "ipv6Prefix", "prefix", "cidr", "ip", "ipv6", "ip_address"):
+                for key in ("ipv4Prefix", "ipv6Prefix", "prefix", "cidr", "ip", "ipv4", "ipv6", "ip_address", "ip_prefix"):
                     value = item.get(key)
                     if value:
                         prefixes.append(value)
@@ -493,14 +630,27 @@ def extract_prefixes(payload):
         for value in payload.values():
             if isinstance(value, dict):
                 prefixes.extend(extract_prefixes(value))
+            elif isinstance(value, list):
+                prefixes.extend(extract_prefixes(value))
     elif isinstance(payload, list):
         for item in payload:
-            prefixes.extend(extract_prefixes(item))
+            if isinstance(item, str):
+                prefixes.append(item)
+            else:
+                prefixes.extend(extract_prefixes(item))
     return normalize_prefixes(prefixes)
 
 
 def extract_text_prefixes(text):
-    candidates = re.findall(r"(?<![A-Za-z0-9_.:-])(?:[0-9A-Fa-f:.]+)(?:/\d{1,3})?(?![A-Za-z0-9_.:-])", text)
+    ipv4 = r"(?:25[0-5]|2[0-4]\d|1?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|1?\d?\d)){3}(?:/\d{1,2})?"
+    ipv6 = r"(?:[0-9A-Fa-f]{0,4}:){2,}[0-9A-Fa-f:.]{0,39}(?:/\d{1,3})?"
+    candidates = re.findall(rf"(?<![A-Za-z0-9_.:-])(?:{ipv4}|{ipv6})(?![A-Za-z0-9_.:-])", text)
+    return normalize_prefixes(candidates)
+
+
+def extract_embedded_prefixes(text):
+    fields = r"(?:ipv4Prefix|ipv6Prefix|ip_prefix|prefix|cidr|ip|ipv4|ipv6|ip_address)"
+    candidates = re.findall(rf'"{fields}"\s*:\s*"([^"]+)"', text)
     return normalize_prefixes(candidates)
 
 
@@ -669,6 +819,15 @@ def main():
             try:
                 text = "\n".join(fetch_text(url) for url in source.get("sourceUrls", [source["sourceUrl"]]))
                 prefixes = extract_text_prefixes(text)
+            except (urllib.error.URLError, TimeoutError) as exc:
+                error = str(exc)
+                cached = previous_services.get(source["id"])
+                if cached:
+                    prefixes = cached["prefixes"]["ipv4"] + cached["prefixes"]["ipv6"]
+        elif source["sourceType"] == "official_embedded_json":
+            try:
+                text = fetch_text(source["sourceUrl"])
+                prefixes = extract_embedded_prefixes(text)
             except (urllib.error.URLError, TimeoutError) as exc:
                 error = str(exc)
                 cached = previous_services.get(source["id"])
