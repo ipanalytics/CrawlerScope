@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: crawler-scope-${{ github.ref }}
@@ -80,24 +78,33 @@ jobs:
               --latest
           fi
 
-      - name: Build Pages artifact
+      - name: Publish GitHub Pages branch
         run: |
-          rm -rf site
-          cp -R public site
-          cp -R data site/data
+          site_source="$RUNNER_TEMP/crawler-scope-site"
+          pages_dir="$RUNNER_TEMP/crawler-scope-pages"
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
+          rm -rf "$site_source" "$pages_dir"
+          mkdir -p "$site_source/data"
+          cp -R public/. "$site_source/"
+          cp -R data/. "$site_source/data/"
+          touch "$site_source/.nojekyll"
 
-  deploy:
-    needs: update
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git fetch origin gh-pages --depth=1 || true
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git worktree add "$pages_dir" origin/gh-pages
+          else
+            git worktree add --detach "$pages_dir"
+            git -C "$pages_dir" checkout --orphan gh-pages
+            git -C "$pages_dir" rm -rf . || true
+          fi
+
+          find "$pages_dir" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R "$site_source"/. "$pages_dir"/
+
+          git -C "$pages_dir" add -A
+          if git -C "$pages_dir" diff --cached --quiet; then
+            echo "No Pages changes to publish."
+          else
+            git -C "$pages_dir" commit -m "Publish CrawlerScope site"
+            git -C "$pages_dir" push origin HEAD:gh-pages
+          fi
