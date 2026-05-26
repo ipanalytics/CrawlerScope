@@ -1,0 +1,726 @@
+{
+  "description": "CrawlerScope source definitions. Use operator-published URLs only; do not add aggregator repository URLs as sources.",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "google-common",
+      "operator": "Google",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.googlebot.com",
+        "*.google.com"
+      ],
+      "service": "Google common crawlers",
+      "sourceType": "official_json",
+      "sourceUrl": "https://developers.google.com/static/crawling/ipranges/common-crawlers.json",
+      "userAgentPatterns": [
+        "Googlebot",
+        "Googlebot-Image",
+        "Googlebot-News",
+        "Googlebot-Video"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "google-special",
+      "operator": "Google",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.google.com"
+      ],
+      "service": "Google special crawlers",
+      "sourceType": "official_json",
+      "sourceUrl": "https://developers.google.com/static/crawling/ipranges/special-crawlers.json",
+      "userAgentPatterns": [
+        "AdsBot-Google",
+        "APIs-Google",
+        "Mediapartners-Google"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "fetcher",
+      "id": "google-user-triggered",
+      "operator": "Google",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.google.com"
+      ],
+      "service": "Google user-triggered fetchers",
+      "sourceType": "official_json",
+      "sourceUrl": "https://developers.google.com/static/crawling/ipranges/user-triggered-fetchers.json",
+      "userAgentPatterns": [
+        "Google-InspectionTool",
+        "GoogleOther"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "bingbot",
+      "operator": "Microsoft",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.search.msn.com"
+      ],
+      "service": "Bingbot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.bing.com/toolbox/bingbot.json",
+      "userAgentPatterns": [
+        "bingbot",
+        "adidxbot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "duckduckbot",
+      "operator": "DuckDuckGo",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.duckduckgo.com"
+      ],
+      "service": "DuckDuckBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://duckduckgo.com/duckduckbot.json",
+      "userAgentPatterns": [
+        "DuckDuckBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "duckassistbot",
+      "operator": "DuckDuckGo",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.duckduckgo.com"
+      ],
+      "service": "DuckAssistBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://duckduckgo.com/duckassistbot.json",
+      "userAgentPatterns": [
+        "DuckAssistBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "documentationUrl": "https://support.apple.com/en-us/119829",
+      "id": "applebot",
+      "operator": "Apple",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.applebot.apple.com"
+      ],
+      "service": "Applebot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://search.developer.apple.com/applebot.json",
+      "userAgentPatterns": [
+        "Applebot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "mojeekbot",
+      "operator": "Mojeek",
+      "operatorCountry": "GB",
+      "rdnsPatterns": [
+        "*.mojeek.com"
+      ],
+      "service": "MojeekBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.mojeek.com/mojeekbot.json",
+      "userAgentPatterns": [
+        "MojeekBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "search",
+      "id": "naver-yeti",
+      "operator": "Naver",
+      "operatorCountry": "KR",
+      "rdnsPatterns": [
+        "*.naver.com"
+      ],
+      "service": "Naver Yeti",
+      "sourceType": "official_json",
+      "sourceUrl": "https://searchadvisor.naver.com/doc/naverbot.json",
+      "userAgentPatterns": [
+        "Yeti"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "search",
+      "id": "yandexbot",
+      "note": "Static known ranges; verify live requests with reverse DNS and forward-confirmation.",
+      "operator": "Yandex",
+      "operatorCountry": "RU",
+      "rdnsPatterns": [
+        "*.spider.yandex.com",
+        "*.yandex.com"
+      ],
+      "service": "YandexBot",
+      "sourceType": "known_static",
+      "sourceUrl": "https://yandex.com/support/webmaster/robot-workings/check-yandex-robots.html",
+      "staticPrefixes": [
+        "5.45.192.0/18",
+        "5.255.0.0/16",
+        "37.9.0.0/16",
+        "37.140.0.0/17",
+        "77.88.0.0/18",
+        "84.201.0.0/16",
+        "87.250.0.0/17",
+        "93.158.0.0/16",
+        "95.108.0.0/16",
+        "141.8.0.0/16",
+        "178.154.0.0/17",
+        "199.21.96.0/22",
+        "213.180.192.0/19"
+      ],
+      "userAgentPatterns": [
+        "YandexBot"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "search",
+      "id": "baiduspider",
+      "note": "Small static seed list; not a complete authoritative Baidu crawler range list.",
+      "operator": "Baidu",
+      "operatorCountry": "CN",
+      "rdnsPatterns": [
+        "*.baidu.com",
+        "*.baidu.jp"
+      ],
+      "service": "Baiduspider",
+      "sourceType": "known_static",
+      "sourceUrl": "https://www.baidu.com/search/spider.html",
+      "staticPrefixes": [
+        "220.181.32.0/19",
+        "61.135.168.0/21"
+      ],
+      "userAgentPatterns": [
+        "Baiduspider"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "openai-gptbot",
+      "operator": "OpenAI",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "GPTBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://openai.com/gptbot.json",
+      "userAgentPatterns": [
+        "GPTBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "openai-searchbot",
+      "operator": "OpenAI",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "OAI-SearchBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://openai.com/searchbot.json",
+      "userAgentPatterns": [
+        "OAI-SearchBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "openai-chatgpt-user",
+      "operator": "OpenAI",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "ChatGPT-User",
+      "sourceType": "official_json",
+      "sourceUrl": "https://openai.com/chatgpt-user.json",
+      "userAgentPatterns": [
+        "ChatGPT-User"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "ai",
+      "id": "openai-adsbot",
+      "note": "OpenAI documents this user-agent but does not publish a separate IP JSON list for it.",
+      "operator": "OpenAI",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "OAI-AdsBot",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://platform.openai.com/docs/bots",
+      "userAgentPatterns": [
+        "OAI-AdsBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "perplexitybot",
+      "operator": "Perplexity",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "PerplexityBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.perplexity.ai/perplexitybot.json",
+      "userAgentPatterns": [
+        "PerplexityBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "perplexity-user",
+      "note": "Official ranges may not cover stealth or browser-like crawler behavior reported by third parties.",
+      "operator": "Perplexity",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Perplexity-User",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.perplexity.ai/perplexity-user.json",
+      "userAgentPatterns": [
+        "Perplexity-User"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "ai",
+      "id": "claudebot",
+      "note": "Anthropic documents crawler user-agents but says it does not publish stable IP ranges.",
+      "operator": "Anthropic",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "ClaudeBot / Claude-SearchBot",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://support.claude.com/en/articles/8896518-what-is-claudebot",
+      "userAgentPatterns": [
+        "ClaudeBot",
+        "Claude-SearchBot",
+        "Claude-User"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+      "id": "amazonbot",
+      "note": "Amazon publishes the list embedded in its developer page rather than as a standalone JSON endpoint.",
+      "operator": "Amazon",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.crawl.amazonbot.amazon"
+      ],
+      "service": "Amazonbot",
+      "sourceType": "official_embedded_json",
+      "sourceUrl": "https://developer.amazon.com/amazonbot/ip-addresses",
+      "userAgentPatterns": [
+        "Amazonbot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+      "id": "amazon-searchbot",
+      "note": "Amazon publishes the list embedded in its developer page rather than as a standalone JSON endpoint.",
+      "operator": "Amazon",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.crawl.amazonbot.amazon"
+      ],
+      "service": "Amzn-SearchBot",
+      "sourceType": "official_embedded_json",
+      "sourceUrl": "https://developer.amazon.com/amazonbot/searchbot-ip-addresses",
+      "userAgentPatterns": [
+        "Amzn-SearchBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "fetcher",
+      "documentationUrl": "https://developer.amazon.com/support/amazonbot",
+      "id": "amazon-amzn-user",
+      "note": "Amazon publishes the live crawl list embedded in its developer page rather than as a standalone JSON endpoint.",
+      "operator": "Amazon",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.crawl.amazonbot.amazon"
+      ],
+      "service": "Amzn-User",
+      "sourceType": "official_embedded_json",
+      "sourceUrl": "https://developer.amazon.com/amazonbot/live-ip-addresses",
+      "userAgentPatterns": [
+        "Amzn-User"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "ai",
+      "id": "meta-ai-crawlers",
+      "note": "Static Meta platform ranges, not crawler-specific authoritative ranges.",
+      "operator": "Meta",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Meta-ExternalAgent / Meta-WebIndexer",
+      "sourceType": "known_static",
+      "sourceUrl": "https://developers.facebook.com/docs/sharing/webmasters/crawler",
+      "staticPrefixes": [
+        "66.220.144.0/20",
+        "69.171.224.0/19",
+        "173.252.64.0/18",
+        "2a03:2880::/29"
+      ],
+      "userAgentPatterns": [
+        "meta-externalagent",
+        "meta-webindexer"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "ai",
+      "id": "bytespider",
+      "operator": "ByteDance",
+      "operatorCountry": "CN",
+      "rdnsPatterns": [],
+      "service": "Bytespider",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://zhanzhang.toutiao.com/",
+      "userAgentPatterns": [
+        "Bytespider"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ai",
+      "id": "mistralai-user",
+      "operator": "Mistral AI",
+      "operatorCountry": "FR",
+      "rdnsPatterns": [],
+      "service": "MistralAI-User",
+      "sourceType": "official_json",
+      "sourceUrl": "https://mistral.ai/mistralai-user-ips.json",
+      "userAgentPatterns": [
+        "MistralAI-User"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "seo",
+      "documentationUrl": "https://help.ahrefs.com/articles/78658-what-is-the-list-of-your-ip-ranges",
+      "id": "ahrefsbot",
+      "operator": "Ahrefs",
+      "operatorCountry": "SG",
+      "rdnsPatterns": [
+        "*.ahrefs.com",
+        "*.ahrefs.net"
+      ],
+      "service": "AhrefsBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://api.ahrefs.com/v3/public/crawler-ip-ranges",
+      "userAgentPatterns": [
+        "AhrefsBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "seo",
+      "id": "lumar-crawler",
+      "operator": "Lumar",
+      "operatorCountry": "GB",
+      "rdnsPatterns": [],
+      "service": "Lumar crawler",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.lumar.io/wp-content/uploads/2026/02/lumar_ip_list_feb_2026.json",
+      "userAgentPatterns": [
+        "Lumar"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "seo",
+      "id": "semrushbot",
+      "operator": "Semrush",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.bot.semrush.com"
+      ],
+      "service": "SemrushBot",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://www.semrush.com/bot.html",
+      "userAgentPatterns": [
+        "SemrushBot"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "security-scanner",
+      "id": "censys",
+      "operator": "Censys",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.censys-scanner.com"
+      ],
+      "service": "Censys scanners",
+      "sourceType": "known_static",
+      "sourceUrl": "https://support.censys.io/",
+      "staticPrefixes": [
+        "198.108.66.0/23",
+        "162.142.125.0/24"
+      ],
+      "userAgentPatterns": [
+        "CensysInspect"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "security-scanner",
+      "id": "shodan",
+      "note": "Community-known/static ranges; verify with reverse DNS and current Shodan documentation.",
+      "operator": "Shodan",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.shodan.io",
+        "*.census.shodan.io"
+      ],
+      "service": "Shodan scanners",
+      "sourceType": "known_static",
+      "sourceUrl": "https://www.shodan.io/",
+      "staticPrefixes": [
+        "198.20.69.0/24",
+        "198.20.70.0/24",
+        "198.20.99.0/24",
+        "71.6.0.0/16",
+        "66.240.192.0/19",
+        "82.221.105.0/24",
+        "93.120.27.0/24",
+        "185.142.236.0/24",
+        "207.90.244.0/24"
+      ],
+      "userAgentPatterns": [
+        "Shodan"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "monitoring",
+      "id": "datadog-synthetics",
+      "operator": "Datadog",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Datadog Synthetics",
+      "sourceType": "official_json",
+      "sourceUrl": "https://ip-ranges.datadoghq.com/synthetics.json",
+      "userAgentPatterns": [
+        "Datadog/Synthetics"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ad-verification",
+      "id": "ias-crawler",
+      "operator": "Integral Ad Science",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "IAS crawler",
+      "sourceType": "official_json",
+      "sourceUrl": "https://integralads.com/policy-docs/iasbot.json",
+      "userAgentPatterns": [
+        "IASBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "ad-verification",
+      "id": "ttd-content",
+      "operator": "The Trade Desk",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "TTD-Content crawler",
+      "sourceType": "official_text",
+      "sourceUrl": "https://ttd-content.adsrvr.org/ips",
+      "userAgentPatterns": [
+        "TTD-Content"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "monitoring",
+      "documentationUrl": "https://uptimerobot.com/locations",
+      "id": "uptimerobot",
+      "operator": "UptimeRobot",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "UptimeRobot",
+      "sourceType": "official_text",
+      "sourceUrl": "https://uptimerobot.com/inc/files/ips/IPv4andIPv6.txt",
+      "userAgentPatterns": [
+        "UptimeRobot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "monitoring",
+      "id": "pingdom",
+      "operator": "SolarWinds Pingdom",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Pingdom probes",
+      "sourceType": "official_text",
+      "sourceUrl": "https://my.pingdom.com/probes/ipv4",
+      "sourceUrls": [
+        "https://my.pingdom.com/probes/ipv4",
+        "https://my.pingdom.com/probes/ipv6"
+      ],
+      "userAgentPatterns": [
+        "Pingdom.com_bot_version_1.4"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "monitoring",
+      "documentationUrl": "https://www.statuscake.com/kb/knowledge-base/what-are-your-ips/",
+      "id": "statuscake",
+      "operator": "StatusCake",
+      "operatorCountry": "GB",
+      "rdnsPatterns": [],
+      "service": "StatusCake probes",
+      "sourceType": "official_json",
+      "sourceUrl": "https://app.statuscake.com/Workfloor/Locations.php?format=json",
+      "userAgentPatterns": [
+        "StatusCake"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "monitoring",
+      "documentationUrl": "https://betterstack.com/docs/uptime/frequently-asked-questions/",
+      "id": "better-stack",
+      "note": "Better Stack publishes probe addresses through its Better Uptime IP text endpoint.",
+      "operator": "Better Stack",
+      "operatorCountry": "CZ",
+      "rdnsPatterns": [],
+      "service": "Better Stack probes",
+      "sourceType": "official_text",
+      "sourceUrl": "https://betteruptime.com/ips.txt",
+      "userAgentPatterns": [
+        "Better Uptime Bot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "archive",
+      "id": "ccbot",
+      "operator": "Common Crawl",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Common Crawl CCBot",
+      "sourceType": "official_json",
+      "sourceUrl": "https://index.commoncrawl.org/ccbot.json",
+      "userAgentPatterns": [
+        "CCBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "social",
+      "id": "flipboard-crawler",
+      "operator": "Flipboard",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Flipboard crawler",
+      "sourceType": "official_text",
+      "sourceUrl": "https://cdn.flipboard.com/flipboard_ip.txt",
+      "userAgentPatterns": [
+        "FlipboardProxy"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "analytics",
+      "id": "parsely-crawler",
+      "operator": "Parse.ly",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "Parse.ly crawler",
+      "sourceType": "official_json",
+      "sourceUrl": "https://www.parse.ly/static/data/crawler-ips.json",
+      "userAgentPatterns": [
+        "Parsely"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "social",
+      "id": "pinterestbot",
+      "operator": "Pinterest",
+      "operatorCountry": "US",
+      "rdnsPatterns": [
+        "*.pinterest.com"
+      ],
+      "service": "Pinterestbot",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://help.pinterest.com/",
+      "userAgentPatterns": [
+        "Pinterestbot"
+      ]
+    },
+    {
+      "authoritative": false,
+      "category": "social",
+      "id": "linkedinbot",
+      "operator": "LinkedIn",
+      "operatorCountry": "US",
+      "rdnsPatterns": [],
+      "service": "LinkedInBot",
+      "sourceType": "documented_user_agent",
+      "sourceUrl": "https://www.linkedin.com/legal/lad",
+      "userAgentPatterns": [
+        "LinkedInBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "social",
+      "documentationUrl": "https://core.telegram.org/bots/webapps#link-preview",
+      "id": "telegram-link-preview",
+      "operator": "Telegram",
+      "operatorCountry": "AE",
+      "rdnsPatterns": [],
+      "service": "Telegram link preview",
+      "sourceType": "official_text",
+      "sourceUrl": "https://core.telegram.org/resources/cidr.txt",
+      "userAgentPatterns": [
+        "TelegramBot"
+      ]
+    },
+    {
+      "authoritative": true,
+      "category": "fetcher",
+      "documentationUrl": "https://rssapi.net/faq",
+      "id": "rssapi-parser",
+      "operator": "RSS API",
+      "operatorCountry": "DE",
+      "rdnsPatterns": [],
+      "service": "RSS API feed parser",
+      "sourceType": "official_text",
+      "sourceUrl": "https://rssapi.net/ips.txt",
+      "userAgentPatterns": [
+        "RSSAPI"
+      ]
+    }
+  ]
+}

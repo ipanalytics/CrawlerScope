@@ -1,6 +1,5 @@
 const dataBase = location.pathname.includes("/public/") ? "../data" : "data";
 const dataUrl = `${dataBase}/current/crawlers.json`;
-const robotsUrl = `${dataBase}/current/robots-ai.txt`;
 let data = null;
 let filtered = [];
 let sortState = { key: "prefixes", direction: "desc" };
@@ -46,6 +45,7 @@ const countryNames = {
   DE: "Germany",
   FR: "France",
   JP: "Japan",
+  AE: "United Arab Emirates",
   SG: "Singapore",
   CZ: "Czechia",
 };
@@ -56,13 +56,8 @@ function fmt(value) {
 
 async function load() {
   updateExportLinks();
-  const [dataResponse, robotsResponse] = await Promise.all([
-    fetch(dataUrl, { cache: "no-store" }),
-    fetch(robotsUrl, { cache: "no-store" }).catch(() => null),
-  ]);
+  const dataResponse = await fetch(dataUrl, { cache: "no-store" });
   data = await dataResponse.json();
-  document.getElementById("robots-preview").textContent =
-    robotsResponse && robotsResponse.ok ? await robotsResponse.text() : "";
   updateFilterOptions();
   render();
 }
@@ -128,6 +123,7 @@ function render() {
   renderFilterSummary();
   renderMetrics();
   renderInsights();
+  renderSnippets();
   renderMap();
   renderCategoryChart();
   renderOperatorBars();
@@ -179,6 +175,10 @@ function renderInsights() {
       </div>
     `)
     .join("");
+}
+
+function renderSnippets() {
+  document.getElementById("robots-preview").textContent = buildRobots(filtered);
 }
 
 function renderMap() {
@@ -475,7 +475,7 @@ function setupCanvas(canvas) {
 }
 
 function iso2ToIso3(code) {
-  return { US: "USA", GB: "GBR", CN: "CHN", RU: "RUS", DE: "DEU", FR: "FRA", JP: "JPN", SG: "SGP", CZ: "CZE" }[code] || code;
+  return { US: "USA", GB: "GBR", CN: "CHN", KR: "KOR", RU: "RUS", DE: "DEU", FR: "FRA", JP: "JPN", AE: "ARE", SG: "SGP", CZ: "CZE" }[code] || code;
 }
 
 function escapeHtml(value) {
