@@ -41,22 +41,7 @@ jobs:
           stamp="$(python3 -c 'import json; print(json.load(open("data/current/crawlers.json"))["generatedAt"].replace(":", "").replace("-", "").replace("Z", "Z"))')"
           tag="dataset-${stamp}"
           snapshot="$(ls -1 data/snapshots/*.json | sort | tail -n 1)"
-          {
-            echo "CrawlerScope dataset generated at ${stamp}."
-            echo
-            python3 - <<'PY'
-          import json
-          data = json.load(open("data/current/crawlers.json"))
-          summary = data["summary"]
-          print(f"- Services: {summary['services']}")
-          print(f"- Sources OK: {summary['sourcesOk']}")
-          print(f"- Authoritative IP lists: {summary['authoritativeLists']}")
-          print(f"- CIDR prefixes: {summary['prefixes']}")
-          print(f"- IPv4 prefixes: {summary['ipv4']}")
-          print(f"- IPv6 prefixes: {summary['ipv6']}")
-          print(f"- AI prefixes: {summary['aiPrefixes']}")
-          PY
-          } > release-notes.md
+          python3 scripts/release_notes.py > release-notes.md
           gh release create "$tag" \
             data/current/crawlers.json \
             data/current/robots-ai.txt \
