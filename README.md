@@ -1,7 +1,7 @@
 # CrawlerScope
 
 <p align="center">
-  <img src="./public/assets/banner.svg" alt="CrawlerScope banner" width="100%">
+  <img src="./public/assets/banner.png" alt="CrawlerScope banner" width="100%">
 </p>
 
 <p align="center">
