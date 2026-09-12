@@ -50,7 +50,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           stamp="$(python3 -c 'import json; print(json.load(open("data/current/crawlers.json"))["generatedAt"].replace(":", "").replace("-", "").replace("Z", "Z"))')"
-          tag="dataset-${stamp}"
+          tag="dataset-current"   # rolling: одна страница релиза, апдейт на месте
           snapshot="$(ls -1 data/snapshots/*.json | sort | tail -n 1)"
           python3 scripts/release_notes.py > release-notes.md
 
